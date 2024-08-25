@@ -12,11 +12,11 @@ const addContactErrorMessages = {
 };
 
 export const createContactSchema = Joi.object({
-    name: Joi.string().min(4).max(15).required().messages(addContactErrorMessages),
+    name: Joi.string().min(4).max(30).required().messages(addContactErrorMessages),
     number: Joi.string().min(9).max(20).required().messages(addContactErrorMessages),
 });
 
 export const updateContactSchema = Joi.object({
-    name: Joi.string().min(4).max(15).messages(addContactErrorMessages),
+    name: Joi.string().min(4).max(30).messages(addContactErrorMessages),
     number: Joi.string().min(9).max(20).messages(addContactErrorMessages),
 });
