@@ -1,9 +1,9 @@
 
 import { ContactsCollection } from '../db/models/phone.js';
 
-export const getAllContacts = async () => {
+export const getAllContacts = async (userId) => {
 
-    const contacts = await ContactsCollection.find();
+    const contacts = await ContactsCollection.find({ userId });
     return contacts;
 };
 
@@ -12,9 +12,9 @@ export const createContact = async (payload) => {
     return contact;
 };
 
-export const patchContact = async (contactId, payload, options = {}) => {
+export const patchContact = async (contactId, userId, payload, options = {}) => {
     const rawResult = await ContactsCollection.findOneAndUpdate(
-        { _id: contactId },
+        { _id: contactId, userId },
         payload,
         {
             new: true,
@@ -30,7 +30,7 @@ export const patchContact = async (contactId, payload, options = {}) => {
     };
 };
 
-export const deleteContact = async (contactId) => {
-    const contact = await ContactsCollection.findOneAndDelete({ _id: contactId });
+export const deleteContact = async (contactId, userId) => {
+    const contact = await ContactsCollection.findOneAndDelete({ _id: contactId, userId });
     return contact;
 };
